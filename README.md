@@ -19,3 +19,7 @@ In this application only your profile can make transfers and you cannot top up y
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 440368177ee65cb4e75b32d791d02534c66de8de
