@@ -8,6 +8,7 @@ import (
 
 type AuthUsecase interface {
 	Login(username string, password string) (string, error)
+	Logout(token string) error
 }
 
 type authUsecase struct {
@@ -26,6 +27,14 @@ func (a *authUsecase) Login(username string, password string) (string, error) {
 	}
 
 	return token, nil
+}
+
+func (a *authUsecase) Logout(token string) error {
+    if err := security.DeleteAccessToken(token); err != nil {
+        return err
+    }
+
+    return nil // Logout berhasil
 }
 
 func NewAuthUsecase(userUsecase UserUsecase) AuthUsecase {

@@ -1,9 +1,10 @@
 package security
 
 import (
+	"errors"
+	"fmt"
 	"payment-application/config"
 	"payment-application/model"
-	"fmt"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -51,3 +52,17 @@ func VerifyAccessToken(tokenString string) (jwt.MapClaims, error) {
 	}
 	return claims, nil
 }
+
+func DeleteAccessToken(userID string) error {
+    // Check if the user's access token exists and delete it.
+	var accessTokens = make(map[string]bool)
+
+    if _, exists := accessTokens[userID]; exists {
+        delete(accessTokens, userID)
+        return nil
+    }
+
+    // Return an error if the access token doesn't exist.
+    return errors.New("Access token not found")
+}
+

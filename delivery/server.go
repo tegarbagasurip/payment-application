@@ -21,8 +21,11 @@ type appServer struct {
 
 func (a *appServer) initController() {
 	a.engine.Use(middleware.LogRequestMiddleware(a.log))
+	controller.NewProfileController(a.engine, a.usecaseManager.ProfileUsecase())
+	controller.NewMerchantController(a.engine, a.usecaseManager.MerchantUsecase())
 	controller.NewUserController(a.engine, a.usecaseManager.UserUsecase())
 	controller.NewAuthController(a.engine, a.usecaseManager.AuthUsecase())
+
 }
 
 func (a *appServer) Run() {
